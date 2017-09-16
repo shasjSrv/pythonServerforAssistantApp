@@ -1,0 +1,25 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+APP	../mqsqlServer.py	/^APP = Flask(__name__)$/;"	kind:variable	line:13
+DB	../DBInterface.py	/^class DB:$/;"	kind:class	line:12
+DBInterface.py	../DBInterface.py	1;"	kind:file	line:1
+MYDB	../mqsqlServer.py	/^MYDB = DB()$/;"	kind:variable	line:14
+conn	../DBInterface.py	/^  conn = None$/;"	kind:variable	line:13
+connect	../DBInterface.py	/^  def connect(self):$/;"	kind:member	line:15
+create_task	../mqsqlServer.py	/^def create_task():$/;"	kind:function	line:17
+fabfile.py	../fabfile.py	1;"	kind:file	line:1
+host_ip	../fabfile.py	/^host_ip = "118.89.57.249"$/;"	kind:variable	line:12
+mqsqlServer.py	../mqsqlServer.py	1;"	kind:file	line:1
+not_found	../mqsqlServer.py	/^def not_found(error):$/;"	kind:function	line:97
+queryRoomRfid	../DBInterface.py	/^  def queryRoomRfid(self, room_no):$/;"	kind:member	line:33
+queryUserName	../DBInterface.py	/^def queryUserName(self, user_id):$/;"	kind:function	line:43
+queryUserRfid	../DBInterface.py	/^  def queryUserRfid(self, room_no,berth_no):$/;"	kind:member	line:23
+query_id_info	../mqsqlServer.py	/^def query_id_info():$/;"	kind:function	line:47
+run_server	../fabfile.py	/^def run_server():$/;"	kind:function	line:42
+runbg	../fabfile.py	/^def runbg(cmd, sockname="dtach"):$/;"	kind:function	line:30
+settings	../DBInterface.py	/^settings = {}$/;"	kind:variable	line:5
+upload_server	../fabfile.py	/^def upload_server():$/;"	kind:function	line:34
