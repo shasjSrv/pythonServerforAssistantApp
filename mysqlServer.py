@@ -39,7 +39,7 @@ def create_task():
         # cursor = MYDB.queryRoomRfid(room_no)
         # ret = cursor.fetchone()
         query_room_rfid_db = DB()
-        ret = DB.queryRoomRfid(room_no)
+        ret = query_room_rfid_db.queryRoomRfid(room_no)
        
 
         if ret is None:
