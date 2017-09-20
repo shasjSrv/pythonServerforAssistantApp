@@ -26,14 +26,22 @@ def create_task():
 
         room_no = request.json['room_no']
         berth_no = request.json['berth_no']
-        cursor = MYDB.queryUserRfid(room_no,berth_no)
-        ret = cursor.fetchone()
+        # cursor = MYDB.queryUserRfid(room_no,berth_no)
+        # ret = cursor.fetchone()
+        # ret = MYDB.queryUserRfid(room_no,berth_no)
+        query_user_rfid_db = DB()
+        ret = query_user_rfid_db.queryUserRfid(room_no,berth_no)
+
         if ret is None:
             return jsonify({'result' : respose}),202
         
         user_rfid = ret[0]
-        cursor = MYDB.queryRoomRfid(room_no)
-        ret = cursor.fetchone()
+        # cursor = MYDB.queryRoomRfid(room_no)
+        # ret = cursor.fetchone()
+        query_room_rfid_db = DB()
+        ret = DB.queryRoomRfid(room_no)
+       
+
         if ret is None:
             return jsonify({'result' : respose}),202
 
@@ -66,8 +74,10 @@ def query_id_info():
 
     user_id = request.json['user_id']
     
-    cursor = MYDB.queryUserName(user_id)
-    ret = cursor.fetchone()
+    # cursor = MYDB.queryUserName(user_id)
+    # ret = cursor.fetchone()
+    query_user_name_db = DB()
+    ret = query_user_name_db.queryUserName(user_id)
     if ret is None:
         return jsonify({'result' : respose}),202
 
@@ -77,33 +87,39 @@ def query_id_info():
     respose['isSuccess'] = 1
     respose['userName'] = user_name
     respose['type'] = user_type
-    cursor = MYDB.queryPatient()
-    ret = cursor.fetchall()
+    # cursor = MYDB.queryPatient()
+    # ret = cursor.fetchall()
+    query_patient_db = DB()
+    ret = query_patient_db.queryPatient()
     if ret is None:
-        return jsonify({'result' : respose}),202
+        return jsonify({'result' : respose}), 202
     
-    
-    for i in range(0,len(ret)):
-        medicine_send_info_list = []
-        medicine_name_list =[]
+
+    for i in range(0, len(ret)):
+        # medicine_send_info_list = []
+        medicine_name_list = []
         medicine_measure_list = []
-        medicine_dosage_list =[]
-        cursor = MYDB.queryUserMedicineInfo(ret[i][1])
-        ret_medicine = cursor.fetchall()
-        for j in range(0,len(ret_medicine)):
+        medicine_dosage_list = []
+        # cursor = MYDB.queryUserMedicineInfo(ret[i][1])
+        # ret_medicine = cursor.fetchall()
+        query_medecine_info_db = DB()
+        ret_medicine = query_medecine_info_db.queryUserMedicineInfo(ret[i][1])
+        
+        for j in range(0, len(ret_medicine)):
             #6 columns: 0 userID,1 medicineName,2 medicineDosage
             #           3 uNit, 4 number, 5 isSend
             is_send = ret_medicine[j][5]
             #if the medicine is sent,jump to next one
             if is_send == 1:    
                 continue
-            medicine_send_info_list.append(is_send)
+            # medicine_send_info_list.append(is_send)
             measure = str(ret_medicine[j][4]) + ret_medicine[j][3]
             medicine_name_list.append(ret_medicine[j][1])
             medicine_measure_list.append(measure)
             medicine_dosage_list.append(ret_medicine[j][2])
 
-        if len(medicine_send_info_list) != 0:
+        print len(medicine_name_list)
+        if len(medicine_name_list) != 0:
             respose['patientNameArray'].append(ret[i][0])
             respose['patientIDArray'].append(ret[i][1])
             respose['medicineNameArray'].append(medicine_name_list)
@@ -113,7 +129,7 @@ def query_id_info():
 
 
 
-    return jsonify({'result' : respose}),201
+    return jsonify({'result' : respose}), 201
 
 
 # @app.route('/sendIDStatuse', methods=['POST'])

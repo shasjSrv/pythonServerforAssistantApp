@@ -33,63 +33,98 @@ class DB(object):
                                     charset='utf8')
 
     def queryUserRfid(self, room_no,berth_no):
-        try:
-            cursor = self.conn.cursor()
-            cursor.execute("SELECT rfid FROM userInfo WHERE userID = \
-            (SELECT userID FROM roomUserInfo WHERE room_no = %s and berth_no = %s)"
-                           , (room_no, berth_no))
-        except (AttributeError, MySQLdb.OperationalError):
-            self.connect()
-            cursor = self.conn.cursor()
-            cursor.execute("SELECT rfid FROM userInfo WHERE userID = \
-            (SELECT userID FROM roomUserInfo WHERE room_no = %s and berth_no = %s)"
-                           , (room_no, berth_no))
-        return cursor
+        # try:
+        cursor = self.conn.cursor()
+        cursor.execute("SELECT rfid FROM userInfo WHERE userID = \
+        (SELECT userID FROM roomUserInfo WHERE room_no = %s and berth_no = %s)"
+                        , (room_no, berth_no))
+        onedata = cursor.fetchone()
+        cursor.close()
+        self.conn.close()
+        return onedata
+        # except (AttributeError, MySQLdb.OperationalError):
+        #     self.connect()
+        #     cursor = self.conn.cursor()
+        #     cursor.execute("SELECT rfid FROM userInfo WHERE userID = \
+        #     (SELECT userID FROM roomUserInfo WHERE room_no = %s and berth_no = %s)"
+        #                    , (room_no, berth_no))
+        # return cursor
     
     def queryUserName(self, user_id):
-        try:
-            cursor = self.conn.cursor()
-            cursor.execute("select userName,type from userInfo where userID = %s", (user_id,))
-        except (AttributeError, MySQLdb.OperationalError):
-            self.connect()
-            cursor = self.conn.cursor()
-            cursor.execute("select userName,type from userInfo where userID = %s", (user_id,))
-        return cursor
+        # try:
+        cursor = self.conn.cursor()
+        cursor.execute("select userName,type from userInfo where userID = %s", (user_id,))
+        onedata = cursor.fetchone()
+        cursor.close()
+        self.conn.close()
+        return onedata
+        # except (AttributeError, MySQLdb.OperationalError):
+        #     self.connect()
+        #     cursor = self.conn.cursor()
+        #     cursor.execute("select userName,type from userInfo where userID = %s", (user_id,))
+        # return cursor
 
     def queryUserMedicineInfo(self, user_id):
-        try:
-            cursor = self.conn.cursor()
-            cursor.execute("SELECT mui.userID,mi.medicineName,mi.medicineDosage,mi.unit,mui.number,mui.isSend \
-            from medicalUserInfo as mui left join medicineInfo as mi on \
-            mi.medicineID = mui.medicineID left join  userInfo as u on\
-            mui.userID = u.userID where mui.userID = %s", (user_id,))
-        except (AttributeError, MySQLdb.OperationalError):
-            self.connect()
-            cursor = self.conn.cursor()
-            cursor.execute("SELECT mui.userID,mi.medicineName,mi.medicineDosage,mi.unit,mui.number,mui.isSend \
-            from medicalUserInfo as mui left join medicineInfo as mi on \
-            mi.medicineID = mui.medicineID  left join userInfo as u on\
-            mui.userID = u.userID where mui.userID = %s", (user_id,))
-        return cursor
-
+        # try:
+        cursor = self.conn.cursor()
+        cursor.execute("SELECT mui.userID,mi.medicineName,mi.medicineDosage,mi.unit,\
+        mui.number,mui.isSend from medicalUserInfo as mui left join medicineInfo as mi on \
+        mi.medicineID = mui.medicineID  left join userInfo as u on\
+        mui.userID = u.userID where mui.userID = %s", (user_id,))
+        alldata = cursor.fetchall()
+        cursor.close()
+        self.conn.close()
+        return alldata
+        # except (AttributeError, MySQLdb.OperationalError):
+        #     self.connect()
+        #     cursor = self.conn.cursor()
+        #     cursor.execute("SELECT mui.userID,mi.medicineName,mi.medicineDosage,mi.unit,\
+        #     mui.number,mui.isSend from medicalUserInfo as mui left join medicineInfo as mi on \
+        #     mi.medicineID = mui.medicineID  left join userInfo as u on\
+        #     mui.userID = u.userID where mui.userID = %s", (user_id,))
+        # return cursor
+    
+    def updateMedicineInfo(self, user_id, medicine_id):
+        # try:
+        cursor = self.conn.cursor()
+        cursor.execute("update medicalUserInfo set isSend = 1 where \
+        userID = %s and medicineID = %s", (user_id, medicine_id))
+        alldata = cursor.fetchall()
+        cursor.close()
+        self.conn.close()
+        return alldata
+        # except (AttributeError, MySQLdb.OperationalError):
+        #     self.connect()
+        #     cursor = self.conn.cursor()
+        #     cursor.execute("update medicalUserInfo set isSend = 1 where \
+        #     userID = %s and medicineID = %s", (user_id, medicine_id))
+        # return cursor
 
     def queryPatient(self):
-        try:
-            cursor = self.conn.cursor()
-            cursor.execute("select userName,userID from userInfo where type = %s", (PATIENT,))
-        except (AttributeError, MySQLdb.OperationalError):
-            self.connect()
-            cursor = self.conn.cursor()
-            cursor.execute("select userName,userID from userInfo where type = %s", (PATIENT,))
-        return cursor
+        # try:
+        cursor = self.conn.cursor()
+        cursor.execute("select userName,userID from userInfo where type = %s", (PATIENT,))
+        alldata = cursor.fetchall()
+        cursor.close()
+        self.conn.close()
+        return alldata
+        # except (AttributeError, MySQLdb.OperationalError):
+        #     self.connect()
+        #     cursor = self.conn.cursor()
+        #     cursor.execute("select userName,userID from userInfo where type = %s", (PATIENT,))
+        # return cursor
 
     def queryRoomRfid(self, room_no):
-        try:
-            cursor = self.conn.cursor()
-            cursor.execute("select rfid from roomInfo where room_no = %s", (room_no,))
-        except (AttributeError, MySQLdb.OperationalError):
-            self.connect()
-            cursor = self.conn.cursor()
-            cursor.execute("select rfid from roomInfo where room_no = %s", (room_no,))
-        return cursor
+        # try:
+        cursor = self.conn.cursor()
+        cursor.execute("select rfid from roomInfo where room_no = %s", (room_no,))
+        onedata = cursor.fetchone()
+        cursor.close()
+        self.conn.close()
+        return onedata
+        # except (AttributeError, MySQLdb.OperationalError):
+        #     self.connect()
+        #     cursor = self.conn.cursor()
+        #     cursor.execute("select rfid from roomInfo where room_no = %s", (room_no,))
+        # return cursor
 
