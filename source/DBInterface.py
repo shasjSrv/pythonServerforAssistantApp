@@ -14,9 +14,10 @@ SETTINGS['MYSQL_PASSWD'] = 'SCUT1234'
 
 PATIENT = 0
 NURSE = 1
-###
+
+###########
 # the limit days of medicine that would be sent
-###
+###########
 DURATION = 4
 
 

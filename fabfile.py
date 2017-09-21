@@ -32,7 +32,7 @@ def runbg(cmd, sockname="dtach"):
 
 
 def upload_server():
-    local('zip -0 -r source mysqlServer.py DBInterface.py')
+    local('zip -0 -r source source/')
     run('mkdir -p server/DBserver')
     put('source.zip', '~/server/DBserver/')
     with cd('~/server/DBserver'):
@@ -40,5 +40,5 @@ def upload_server():
 
 
 def run_server():
-    with cd('./server/DBserver'):
+    with cd('./server/DBserver/source'):
         run('python mysqlServer.py')
