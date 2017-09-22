@@ -1,8 +1,7 @@
 """This module is interface to mysql."""
 import sys
 from DBInterface import DB
-from dealRobotAccess import respose_query_id_information\
-, respose_update_medicine_state
+import dealRobotAccess
 
 from flask import Flask, jsonify
 from flask import request
@@ -62,7 +61,7 @@ def query_id_info():
     """
     if not request.json or not 'user_id' in request.json:
         abort(400)
-    respose = respose_query_id_information(request.json)
+    respose = dealRobotAccess.respose_query_id_info(request.json)
   
     return jsonify({'result' : respose}), 201
 
@@ -79,7 +78,7 @@ def update_medicine_state():
     or not 'date_dd' in request.json:
         abort(400)
     
-    respose = respose_update_medicine_state(request.json)
+    respose = dealRobotAccess.respose_update_medicine_state(request.json)
 
     return jsonify({'result' : respose}), 201
 

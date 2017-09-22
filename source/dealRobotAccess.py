@@ -1,7 +1,7 @@
 from DBInterface import DB
 
 
-def respose_query_id_information(request_json):
+def respose_query_id_info(request_json):
     respose = {
         'isSuccess' : 0,
         'userName' : "",
