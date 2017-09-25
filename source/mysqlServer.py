@@ -1,17 +1,33 @@
 """This module is interface to mysql."""
 import sys
+import json
 from DBInterface import DB
 import dealRobotAccess
+import dealWebAccess
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, redirect, url_for, Response
 from flask import request
 from flask import make_response
 from flask import abort
+
+
+from flask_login import LoginManager , login_required , UserMixin , login_user
 # from PIL import Image, ImageFile
 
 APP = Flask(__name__)
 MYDB = DB()
 
+
+
+@APP.route('/QueryPatientInfo', methods=['POST','GET'])
+def query_patient_info():
+    # if not request.json:
+    #     abort(400)   
+    respose = dealWebAccess.respose_query_user_info()
+    resp = Response(json.dumps(respose))
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    resp.headers['Content-Type'] = 'application/json'
+    return resp
 
 @APP.route('/QueryIDInfo', methods=['POST'])
 def create_task():
@@ -28,19 +44,16 @@ def create_task():
 
         room_no = request.json['room_no']
         berth_no = request.json['berth_no']
-        # cursor = MYDB.queryUserRfid(room_no,berth_no)
-        # ret = cursor.fetchone()
-        # ret = MYDB.queryUserRfid(room_no,berth_no)
+        
         query_user_rfid_db = DB()
-        ret = query_user_rfid_db.queryUserRfid(room_no, berth_no)
+        ret = query_user_rfid_db.query_user_rfid(room_no, berth_no)
 
         if ret is None:
             return jsonify({'result' : respose}), 202
         user_rfid = ret[0]
-        # cursor = MYDB.queryRoomRfid(room_no)
-        # ret = cursor.fetchone()
+        
         query_room_rfid_db = DB()
-        ret = query_room_rfid_db.queryRoomRfid(room_no)
+        ret = query_room_rfid_db.query_room_rfid(room_no)
 
         if ret is None:
             return jsonify({'result' : respose}), 202
@@ -82,28 +95,14 @@ def update_medicine_state():
 
     return jsonify({'result' : respose}), 201
 
-# @app.route('/sendIDStatuse', methods=['POST'])
-# def create_task():
-#     if not request.json or not 'photo' in request.json:
-#         abort(400)  
-#     task = {
-#         'id': tasks[-1]['id'] + 1,
-#         'title': request.json['photo'],
-#         'description': request.json.get('description', ""),
-#         'done': False
-#     }
-#     #print base64.b64decode(task['title'])
-#     #ImageFile.MAXBLOCK = 2**20
-#     #print base64.b64decode(strs)  
-#     fh = open("imageToSave.jpeg", "wb")
-#     fh.write(task['title'].decode('base64'))
-#     fh.close()
-#     print type(task['title'].decode('base64'))
-#     #file = cStringIO.StringIO(request.json.get('description', ""))
-#     #img = Image.open(file)
-#     #img.show()
-#     tasks.append(task)
-#     return jsonify({'task': task}), 201
+@APP.route('/CheckUpdateCondition', methods=['POST'])
+def check_update_condition():
+    if not request.json or not 'user_id':
+        abort(400)
+    respose = dealRobotAccess.respose_query_user_info(request.json)
+
+    return jsonify({'result' : respose}), 201
+
 
 
 @APP.errorhandler(404)
