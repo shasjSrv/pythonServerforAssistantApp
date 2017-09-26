@@ -50,8 +50,8 @@ def respose_query_id_info(request_json):
         ret_medicine = query_medecine_info_db.query_user_medicine_info(ret[i][1])
         
         for j in range(0, len(ret_medicine)):
-            #7 columns: 0 userID,1 medicineName,2 medicineDosage
-            #           3 uNit, 4 number, 5 isSend, 6 medicineID
+            #8 columns: 0 userID,1 medicineName,2 medicineDosage
+            #           3 uNit, 4 number, 5 isSend, 6 medicineID,8 dateTime
             is_send = ret_medicine[j][5]
             #if the medicine is sent,jump to next one
             if is_send == 1:    

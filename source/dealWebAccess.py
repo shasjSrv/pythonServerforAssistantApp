@@ -1,5 +1,6 @@
 from DBInterface import DB
 
+
 def respose_query_user_info():
     """
     This function is about querying whole info of a user.
@@ -43,7 +44,9 @@ def respose_query_user_medicine(request_json):
         'medicineName':[],
         'medicineCount':[],
         'medicineDosage':[],
-        'medicineID': []
+        'medicineID': [],
+        'isSent':[],
+        'dateTime':[]
     }
     user_id = request_json['user_id']
     query_medecine_info_db = DB()
@@ -51,15 +54,18 @@ def respose_query_user_medicine(request_json):
 
     if ret_medicine is None:
         return respose
+    respose['isSuccess'] = 1
 
     for j in range(0, len(ret_medicine)):
         #7 columns: 0 userID,1 medicineName,2 medicineDosage
-        #           3 uNit, 4 number, 5 isSend, 6 medicineID
+        #           3 uNit, 4 number, 5 isSend, 6 medicineID,8 dateTime
         is_send = ret_medicine[j][5]
         measure = str(ret_medicine[j][4]) + ret_medicine[j][3]
         respose['medicineName'].append(ret_medicine[j][1])
         respose['medicineCount'].append(measure)
         respose['medicineDosage'].append(ret_medicine[j][2])
         respose['medicineID'].append(ret_medicine[j][6])
+        respose['isSent'].append(is_send)
+        respose['dateTime'].append(ret_medicine[j][7].strftime('%m/%d/%Y'))
 
     return respose

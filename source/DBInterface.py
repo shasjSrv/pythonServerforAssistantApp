@@ -16,6 +16,8 @@ SETTINGS['MYSQL_PASSWD'] = 'SCUT1234'
 ########
 PATIENT = 0
 NURSE = 1
+DORCORT = 2
+MANAGER = 3
 
 ###########
 # the limit days of medicine that would be sent
@@ -42,6 +44,13 @@ class DB(object):
                                     passwd=SETTINGS['MYSQL_PASSWD'],
                                     db=SETTINGS['MYSQL_DBNAME'],
                                     charset='utf8')
+    def query_web_user_name_pwd(self):
+        cursor = self.conn.cursor()
+        cursor.execute("select * from webUserLoginInfo")
+        onedata = cursor.fetchall()
+        cursor.close()
+        self.conn.close()
+        return onedata
 
     def query_user_rfid(self, room_no,berth_no):
         # try:
@@ -95,8 +104,8 @@ class DB(object):
         # try:
         cursor = self.conn.cursor()
         cursor.execute("SELECT mui.userID,mi.medicineName,mi.medicineDosage,mi.unit,\
-        mui.number,mui.isSend,mi.medicineID from medicalUserInfo as mui left join medicineInfo as mi on \
-        mi.medicineID = mui.medicineID  left join userInfo as u on\
+        mui.number,mui.isSend,mi.medicineID,mui.dateTime from medicalUserInfo as mui left \
+        join medicineInfo as mi on mi.medicineID = mui.medicineID  left join userInfo as u on\
         mui.userID = u.userID where mui.userID = %s", (user_id,))
         alldata = cursor.fetchall()
         cursor.close()
@@ -130,6 +139,16 @@ class DB(object):
         userID = %s and medicineID = %s and dateTime BETWEEN %s AND %s "\
         , (user_id, medicine_id, date(int(date_yyyy), int(date_mm), int(date_dd) - DURATION)\
         , date(int(date_yyyy), int(date_mm), int(date_dd))))
+        self.conn.commit()
+        cursor.close()
+        self.conn.close()
+        return True
+
+
+    def insert_web_user_login_info(self, user_id, user_name, passwd):
+        cursor = self.conn.cursor()
+        cursor.execute("insert into webUserLoginInfo values (%s, %s, %s)"\
+        ,(user_id, user_name, passwd))
         self.conn.commit()
         cursor.close()
         self.conn.close()

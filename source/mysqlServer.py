@@ -4,6 +4,7 @@ import json
 from DBInterface import DB
 import dealRobotAccess
 import dealWebAccess
+from userRepository import UsersRepository, User
 
 from flask import Flask, jsonify, redirect, url_for, Response
 from flask import request
@@ -11,15 +12,63 @@ from flask import make_response
 from flask import abort
 
 
-from flask_login import LoginManager , login_required , UserMixin , login_user
+from flask_login import LoginManager, login_required, UserMixin, login_user
 # from PIL import Image, ImageFile
 
 APP = Flask(__name__)
+APP.config['SECRET_KEY'] = 'secret_key'
+LOGIN_MANAGER = LoginManager()
+LOGIN_MANAGER.init_app(APP)
 MYDB = DB()
+USERS_RESPOITORY = UsersRepository()
 
 
+
+
+
+
+@APP.route('/login' , methods=['GET' , 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        registeredUser = USERS_RESPOITORY.get_user(username)
+        print('Users '+ str(USERS_RESPOITORY.users))
+        print('Register user %s , password %s' % (registeredUser.username, registeredUser.password))
+        if registeredUser != None and registeredUser.password == password:
+            print('Logged in..')
+            login_user(registeredUser)
+            return redirect(url_for('QueryPatientInfo'))
+        else:
+            return abort(401)
+    else:
+        return Response('''
+            <form action="" method="post">
+                <p><input type=text name=username>
+                <p><input type=password name=password>
+                <p><input type=submit value=Login>
+            </form>
+        ''')
+
+@APP.route('/register' , methods = ['GET' , 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        new_user = User(username, password, USERS_RESPOITORY.next_index())
+        USERS_RESPOITORY.insert_registered_user(new_user)
+        return Response("Registered Successfully")
+    else:
+        return Response('''
+            <form action="" method="post">
+            <p><input type=text name=username placeholder="Enter username">
+            <p><input type=password name=password placeholder="Enter password">
+            <p><input type=submit value=Login>
+            </form>
+        ''')
 
 @APP.route('/QueryPatientInfo', methods=['POST','GET'])
+@login_required
 def query_patient_info():
     # if not request.json:
     #     abort(400)   
@@ -30,10 +79,12 @@ def query_patient_info():
     return resp
 
 @APP.route('/QueryUserMedicine', methods=['POST'])
+@login_required
 def query_user_medicine():
     """
     This function is about Query user medicine.
     """
+    print request.json
     if not request.json or not 'user_id' in request.json:
         abort(400)
     
@@ -88,6 +139,12 @@ def not_found(error):
     This function is about error.
     """
     return make_response(jsonify({'error': 'Not found'}), 404)
+
+
+@LOGIN_MANAGER.user_loader
+def load_user(userid):
+    return USERS_RESPOITORY.get_user_by_id(userid)
+
 
 if __name__ == '__main__':
     reload(sys) 
