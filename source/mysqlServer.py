@@ -1,6 +1,7 @@
 """This module is interface to mysql."""
 import sys
 import json
+import hashlib
 from DBInterface import DB
 import dealRobotAccess
 import dealWebAccess
@@ -12,6 +13,7 @@ from flask import make_response
 from flask import abort
 
 
+# from passlib.apps import custom_app_context as pwd_context
 from flask_login import LoginManager, login_required, UserMixin, login_user
 # from PIL import Image, ImageFile
 
@@ -24,7 +26,10 @@ USERS_RESPOITORY = UsersRepository()
 
 
 
-
+# @APP.route("/settings")
+# @login_required
+# def settings():
+#     pass
 
 
 @APP.route('/login' , methods=['GET' , 'POST'])
@@ -34,11 +39,16 @@ def login():
         password = request.form['password']
         registeredUser = USERS_RESPOITORY.get_user(username)
         print('Users '+ str(USERS_RESPOITORY.users))
-        print('Register user %s , password %s' % (registeredUser.username, registeredUser.password))
-        if registeredUser != None and registeredUser.password == password:
+        print('Register user %s , password %s' % (registeredUser.username, registeredUser.password_hash))
+        # print('hash passwd %s' % pwd_context.encrypt(password))
+        md5 = hashlib.md5()
+        md5.update(password)
+        password = md5.hexdigest()
+        # print password
+        if registeredUser != None and registeredUser.password_hash == password:
             print('Logged in..')
             login_user(registeredUser)
-            return redirect(url_for('QueryPatientInfo'))
+            return redirect(url_for('query_patient_info'))
         else:
             return abort(401)
     else:
@@ -56,6 +66,7 @@ def register():
         username = request.form['username']
         password = request.form['password']
         new_user = User(username, password, USERS_RESPOITORY.next_index())
+        new_user.hash_password()
         USERS_RESPOITORY.insert_registered_user(new_user)
         return Response("Registered Successfully")
     else:
@@ -143,6 +154,8 @@ def not_found(error):
 
 @LOGIN_MANAGER.user_loader
 def load_user(userid):
+    print userid
+    print USERS_RESPOITORY.get_user_by_id(userid)
     return USERS_RESPOITORY.get_user_by_id(userid)
 
 

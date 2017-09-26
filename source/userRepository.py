@@ -1,14 +1,18 @@
 from DBInterface import DB
 from flask_login import UserMixin
-from passlib.apps import custom_app_context as pwd_context
+# from passlib.apps import custom_app_context as pwd_context
+import hashlib
 
 
 class User(UserMixin):
     def __init__(self , username , password , id , active=True):
         self.id = id
         self.username = username
-        self.password_hash = pwd_context.encrypt(password)
+        self.md5 = hashlib.md5()
+        self.password_hash = password 
+        # self.hash_password(password)
         self.active = active
+        print self.password_hash
 
     def get_id(self):
         return self.id
@@ -19,11 +23,14 @@ class User(UserMixin):
     def get_auth_token(self):
         return make_secure_token(self.username, key='secret_key')
 
-    def hash_password(self, password):
-        self.password_hash = pwd_context.encrypt(password)
+    def hash_password(self):
+        self.md5.update(self.password_hash)
+        self.password_hash = self.md5.hexdigest()
+        print self.password_hash
 
-    def verify_password(self, password):
-        return pwd_context.verify(password, self.password_hash)
+
+    # def verify_password(self, password):
+    #     return pwd_context.verify(password, self.password_hash)
 
 
 
@@ -35,7 +42,7 @@ class UsersRepository:
         self.users_id_dict = dict()
         self.identifier = 0
         self.query_registered_user()
-        
+        print ('identifier %d' % self.identifier)
     
     def query_registered_user(self):
         query_db = DB()
@@ -57,6 +64,7 @@ class UsersRepository:
 
 
     def save_user(self, user):
+        print ("userid %d" % user.id)
         self.users_id_dict.setdefault(user.id, user)
         self.users.setdefault(user.username, user)
 
@@ -64,7 +72,7 @@ class UsersRepository:
         return self.users.get(username)
 
     def get_user_by_id(self, userid):
-        return self.users.get(userid)
+        return self.users_id_dict.get(userid)
 
     def next_index(self):
         self.identifier += 1

@@ -123,12 +123,12 @@ def respose_query_user_info(request_json):
     respose['isSuccess'] = 1
     #7 columns: 0 userID,1 userName,2 age
     #           3 gender, 4 rfid, 5 roomNo, 6 berthNo
-    respose['userID'] = ret[0[0]]
-    respose['userName'] = ret[0][1]
-    respose['age'] = ret[0][2]
-    respose['gender'] = ret[0][3]
-    respose['rfid'] = ret[0][4]
-    respose['roomNo'] = ret[0][5]
-    respose['berthNo'] = ret[0][6]
+    respose['userID'] = ret[0]
+    respose['userName'] = ret[1]
+    respose['age'] = ret[2]
+    respose['gender'] = ret[3]
+    respose['rfid'] = ret[4]
+    respose['roomNo'] = ret[5]
+    respose['berthNo'] = ret[6]
 
     return respose

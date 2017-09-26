@@ -147,7 +147,7 @@ class DB(object):
 
     def insert_web_user_login_info(self, user_id, user_name, passwd):
         cursor = self.conn.cursor()
-        cursor.execute("insert into webUserLoginInfo values (%s, %s, %s)"\
+        cursor.execute("insert into webUserLoginInfo(userID, userName, passwd) values (%s, %s, %s)"\
         ,(user_id, user_name, passwd))
         self.conn.commit()
         cursor.close()
