@@ -29,42 +29,19 @@ def query_patient_info():
     resp.headers['Content-Type'] = 'application/json'
     return resp
 
-@APP.route('/QueryIDInfo', methods=['POST'])
-def create_task():
+@APP.route('/QueryUserMedicine', methods=['POST'])
+def query_user_medicine():
     """
-    This function is about Query room RFID and user RFID.
+    This function is about Query user medicine.
     """
-    if not request.json or not 'room_no' or not 'berth_no' in request.json:
+    if not request.json or not 'user_id' in request.json:
         abort(400)
-        respose = {
-            'isSuccess' : 0,
-            'userRfid' : -1,
-            'roomRfid' : -1
-        }
-
-        room_no = request.json['room_no']
-        berth_no = request.json['berth_no']
-        
-        query_user_rfid_db = DB()
-        ret = query_user_rfid_db.query_user_rfid(room_no, berth_no)
-
-        if ret is None:
-            return jsonify({'result' : respose}), 202
-        user_rfid = ret[0]
-        
-        query_room_rfid_db = DB()
-        ret = query_room_rfid_db.query_room_rfid(room_no)
-
-        if ret is None:
-            return jsonify({'result' : respose}), 202
-
-        room_rfid = ret[0]
-        respose['isSuccess'] = 1
-        respose['userRfid'] = user_rfid
-        respose['roomRfid'] = room_rfid
-
-
-        return jsonify({'result' : respose}), 201
+    
+    respose = dealWebAccess.respose_query_user_medicine(request.json)
+    resp = Response(json.dumps(respose))
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    resp.headers['Content-Type'] = 'application/json'
+    return resp
 
 
 @APP.route('/QueryID', methods=['POST'])

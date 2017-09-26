@@ -100,6 +100,9 @@ def respose_update_medicine_state(request_json):
 
 
 def respose_query_user_info(request_json):
+    """
+    return the whole user info which want to query
+    """
     respose = {
         'isSuccess': 0,
         'userID' : -1,

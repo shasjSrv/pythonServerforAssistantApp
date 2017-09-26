@@ -47,7 +47,7 @@ class DB(object):
         # try:
         cursor = self.conn.cursor()
         cursor.execute("SELECT rfid FROM userInfo WHERE userID = \
-        (SELECT userID FROM roomUserInfo WHERE roomNo = %s and berthNo = %s)"
+        (SELECT userID FROM roomUserInfo WHERE roomNo = %s and berthNo = %s)"\
         , (room_no, berth_no))
         onedata = cursor.fetchone()
         cursor.close()
