@@ -66,7 +66,7 @@ class DB(object):
        
     def query_patient_info(self):
         """
-        select table userInfo and table roomUserInfo 
+        select table userInfo and table roomUserInfo to fetch all patients
         """
         cursor = self.conn.cursor()
         cursor.execute("select ui.userID,ui.userName,ui.age,ui.gender,ui.rfid,rui.roomNo,\
@@ -114,7 +114,7 @@ class DB(object):
         
     def query_patient(self):
         """
-        select table userInfo 
+        Select table userInfo 
         """
         cursor = self.conn.cursor()
         cursor.execute("select userName,userID,rfid from userInfo where type = %s", (PATIENT,))
@@ -146,6 +146,9 @@ class DB(object):
 
 
     def insert_web_user_login_info(self, user_id, user_name, passwd):
+        """
+        Insert a new user to table webUserLoginInfo.
+        """
         cursor = self.conn.cursor()
         cursor.execute("insert into webUserLoginInfo(userID, userName, passwd) values (%s, %s, %s)"\
         ,(user_id, user_name, passwd))

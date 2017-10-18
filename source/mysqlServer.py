@@ -2,6 +2,7 @@
 import sys
 import json
 import hashlib
+from datetime import timedelta
 from DBInterface import DB
 import dealRobotAccess
 import dealWebAccess
@@ -9,27 +10,25 @@ from userRepository import UsersRepository, User
 
 from flask import Flask, jsonify, redirect, url_for, Response
 from flask import request
-from flask import make_response
+from flask import make_response, render_template, send_from_directory
 from flask import abort
-
+from flask_cors import CORS
 
 # from passlib.apps import custom_app_context as pwd_context
 from flask_login import LoginManager, login_required, UserMixin, login_user
 # from PIL import Image, ImageFile
 
 APP = Flask(__name__)
+CORS(APP, resources={r"*": {"origins": "http://localhost:4200"}}, supports_credentials=True)
 APP.config['SECRET_KEY'] = 'secret_key'
 LOGIN_MANAGER = LoginManager()
 LOGIN_MANAGER.init_app(APP)
+LOGIN_MANAGER.login_view = "login"
+LOGIN_MANAGER.login_message = unicode("Bonvolu ensaluti por uzi tiun paon.")
+LOGIN_MANAGER.login_message_category = "info"
+
 MYDB = DB()
 USERS_RESPOITORY = UsersRepository()
-
-
-
-# @APP.route("/settings")
-# @login_required
-# def settings():
-#     pass
 
 
 @APP.route('/login' , methods=['GET' , 'POST'])
@@ -38,8 +37,8 @@ def login():
         username = request.form['username']
         password = request.form['password']
         registeredUser = USERS_RESPOITORY.get_user(username)
-        print('Users '+ str(USERS_RESPOITORY.users))
-        print('Register user %s , password %s' % (registeredUser.username, registeredUser.password_hash))
+        # print('Users '+ str(USERS_RESPOITORY.users))
+        # print('Register user %s , password %s' % (registeredUser.username, registeredUser.password_hash))
         # print('hash passwd %s' % pwd_context.encrypt(password))
         md5 = hashlib.md5()
         md5.update(password)
@@ -48,7 +47,14 @@ def login():
         if registeredUser != None and registeredUser.password_hash == password:
             print('Logged in..')
             login_user(registeredUser)
-            return redirect(url_for('query_patient_info'))
+            resp = Response('success!')
+            resp.headers['Access-Control-Allow-Origin'] = 'http://localhost:4200' 
+            resp.headers['Access-Control-Allow-Credentials'] = 'true'
+            
+            #resp.headers['Access-Control-Allow-Origin'] = '*'
+            #resp.headers['Content-Type'] = 'application/json'
+            return resp
+            #return redirect(url_for('query_patient_info'))
         else:
             return abort(401)
     else:
@@ -59,6 +65,7 @@ def login():
                 <p><input type=submit value=Login>
             </form>
         ''')
+        # return render_template('index.html')
 
 @APP.route('/register' , methods = ['GET' , 'POST'])
 def register():
@@ -79,18 +86,21 @@ def register():
         ''')
 
 @APP.route('/QueryPatientInfo', methods=['POST','GET'])
-@login_required
+# @login_required
 def query_patient_info():
     # if not request.json:
     #     abort(400)   
     respose = dealWebAccess.respose_query_user_info()
     resp = Response(json.dumps(respose))
-    resp.headers['Access-Control-Allow-Origin'] = '*'
+    #resp.headers['Access-Control-Allow-Origin'] = 'https://developer.mozilla.org'
+    resp.headers['Access-Control-Allow-Origin'] = 'http://localhost:4200'  
+    resp.headers['Access-Control-Allow-Methods'] = 'POST'  
+    resp.headers['Access-Control-Allow-Headers'] = 'Referer,Accept,Origin,User-Agent'
     resp.headers['Content-Type'] = 'application/json'
     return resp
 
 @APP.route('/QueryUserMedicine', methods=['POST'])
-@login_required
+# @login_required
 def query_user_medicine():
     """
     This function is about Query user medicine.
@@ -154,9 +164,31 @@ def not_found(error):
 
 @LOGIN_MANAGER.user_loader
 def load_user(userid):
-    print userid
-    print USERS_RESPOITORY.get_user_by_id(userid)
+    """
+    This callback is used to reload the user object
+    from the user ID stored in the session.
+    It should take the unicode ID of a user,
+    and return the corresponding user object.
+    """
+    # print userid
+    # print USERS_RESPOITORY.get_user_by_id(userid)
     return USERS_RESPOITORY.get_user_by_id(userid)
+
+
+# @APP.route('/')
+# def simulate():
+#     return render_template('index.html')
+
+# @APP.route('/<path:path>')
+# def send_static(path):
+#     if ('.js' in path)\
+#     or ('.ico' in path)\
+#     or ('.png' in path) \
+#     or ('.jpg' in path) \
+#     or ('.map' in path):
+#         return send_from_directory('templates', path)
+
+
 
 
 if __name__ == '__main__':

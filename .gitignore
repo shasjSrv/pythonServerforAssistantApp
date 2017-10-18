@@ -1,2 +1,7 @@
 source.zip
 node_modules/
+
+patient-info.tar
+patient-info/
+source/static/
+source/templates/

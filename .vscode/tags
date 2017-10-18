@@ -4,24 +4,24 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-APP	../source/mysqlServer.py	/^APP = Flask(__name__)$/;"	kind:variable	line:20
+APP	../source/mysqlServer.py	/^APP = Flask(__name__)$/;"	kind:variable	line:21
 DB	../source/DBInterface.py	/^class DB(object):$/;"	kind:class	line:28
 DBInterface.py	../source/DBInterface.py	1;"	kind:file	line:1
 DORCORT	../source/DBInterface.py	/^DORCORT = 2$/;"	kind:variable	line:19
 DURATION	../source/DBInterface.py	/^DURATION = 4$/;"	kind:variable	line:25
-LOGIN_MANAGER	../source/mysqlServer.py	/^LOGIN_MANAGER = LoginManager()$/;"	kind:variable	line:22
+LOGIN_MANAGER	../source/mysqlServer.py	/^LOGIN_MANAGER = LoginManager()$/;"	kind:variable	line:24
 MANAGER	../source/DBInterface.py	/^MANAGER = 3$/;"	kind:variable	line:20
-MYDB	../source/mysqlServer.py	/^MYDB = DB()$/;"	kind:variable	line:24
+MYDB	../source/mysqlServer.py	/^MYDB = DB()$/;"	kind:variable	line:30
 NURSE	../source/DBInterface.py	/^NURSE = 1$/;"	kind:variable	line:18
 PATIENT	../source/DBInterface.py	/^PATIENT = 0$/;"	kind:variable	line:17
 SETTINGS	../source/DBInterface.py	/^SETTINGS = {}$/;"	kind:variable	line:7
-USERS_RESPOITORY	../source/mysqlServer.py	/^USERS_RESPOITORY = UsersRepository()$/;"	kind:variable	line:25
+USERS_RESPOITORY	../source/mysqlServer.py	/^USERS_RESPOITORY = UsersRepository()$/;"	kind:variable	line:31
 User	../source/userRepository.py	/^class User(UserMixin):$/;"	kind:class	line:7
 UsersRepository	../source/userRepository.py	/^class UsersRepository:$/;"	kind:class	line:38
 __init__	../source/DBInterface.py	/^    def __init__(self):$/;"	kind:member	line:34
 __init__	../source/userRepository.py	/^    def __init__(self , username , password , id , active=True):$/;"	kind:member	line:8
 __init__	../source/userRepository.py	/^    def __init__(self):$/;"	kind:member	line:40
-check_update_condition	../source/mysqlServer.py	/^def check_update_condition():$/;"	kind:function	line:138
+check_update_condition	../source/mysqlServer.py	/^def check_update_condition():$/;"	kind:function	line:148
 conn	../source/DBInterface.py	/^    conn = None$/;"	kind:variable	line:32
 connect	../source/DBInterface.py	/^    def connect(self):$/;"	kind:member	line:37
 dealRobotAccess.py	../source/dealRobotAccess.py	1;"	kind:file	line:1
@@ -29,31 +29,31 @@ dealWebAccess.py	../source/dealWebAccess.py	1;"	kind:file	line:1
 fabfile.py	../fabfile.py	1;"	kind:file	line:1
 get_auth_token	../source/userRepository.py	/^    def get_auth_token(self):$/;"	kind:member	line:23
 get_id	../source/userRepository.py	/^    def get_id(self):$/;"	kind:member	line:17
-get_user	../source/userRepository.py	/^    def get_user(self, username):$/;"	kind:member	line:70
-get_user_by_id	../source/userRepository.py	/^    def get_user_by_id(self, userid):$/;"	kind:member	line:73
+get_user	../source/userRepository.py	/^    def get_user(self, username):$/;"	kind:member	line:71
+get_user_by_id	../source/userRepository.py	/^    def get_user_by_id(self, userid):$/;"	kind:member	line:74
 hash_password	../source/userRepository.py	/^    def hash_password(self):$/;"	kind:member	line:26
 host_ip	../fabfile.py	/^host_ip = "118.89.57.249"$/;"	kind:variable	line:12
 insert_registered_user	../source/userRepository.py	/^    def insert_registered_user(self, user):$/;"	kind:member	line:57
 insert_web_user_login_info	../source/DBInterface.py	/^    def insert_web_user_login_info(self, user_id, user_name, passwd):$/;"	kind:member	line:148
 is_active	../source/userRepository.py	/^    def is_active(self):$/;"	kind:member	line:20
-load_user	../source/mysqlServer.py	/^def load_user(userid):$/;"	kind:function	line:156
-login	../source/mysqlServer.py	/^def login():$/;"	kind:function	line:36
+load_user	../source/mysqlServer.py	/^def load_user(userid):$/;"	kind:function	line:166
+login	../source/mysqlServer.py	/^def login():$/;"	kind:function	line:35
 mysqlServer.py	../source/mysqlServer.py	1;"	kind:file	line:1
-next_index	../source/userRepository.py	/^    def next_index(self):$/;"	kind:member	line:76
-not_found	../source/mysqlServer.py	/^def not_found(error):$/;"	kind:function	line:148
-query_id_info	../source/mysqlServer.py	/^def query_id_info():$/;"	kind:function	line:110
+next_index	../source/userRepository.py	/^    def next_index(self):$/;"	kind:member	line:77
+not_found	../source/mysqlServer.py	/^def not_found(error):$/;"	kind:function	line:158
+query_id_info	../source/mysqlServer.py	/^def query_id_info():$/;"	kind:function	line:120
 query_patient	../source/DBInterface.py	/^    def query_patient(self):$/;"	kind:member	line:115
 query_patient_info	../source/DBInterface.py	/^    def query_patient_info(self):$/;"	kind:member	line:67
-query_patient_info	../source/mysqlServer.py	/^def query_patient_info():$/;"	kind:function	line:83
+query_patient_info	../source/mysqlServer.py	/^def query_patient_info():$/;"	kind:function	line:90
 query_patient_info_by_userid	../source/DBInterface.py	/^    def query_patient_info_by_userid(self, user_id):$/;"	kind:member	line:80
 query_registered_user	../source/userRepository.py	/^    def query_registered_user(self):$/;"	kind:member	line:47
 query_room_rfid	../source/DBInterface.py	/^    def query_room_rfid(self, room_no):$/;"	kind:member	line:127
-query_user_medicine	../source/mysqlServer.py	/^def query_user_medicine():$/;"	kind:function	line:94
+query_user_medicine	../source/mysqlServer.py	/^def query_user_medicine():$/;"	kind:function	line:104
 query_user_medicine_info	../source/DBInterface.py	/^    def query_user_medicine_info(self, user_id):$/;"	kind:member	line:103
 query_user_name	../source/DBInterface.py	/^    def query_user_name(self, user_id):$/;"	kind:member	line:93
 query_user_rfid	../source/DBInterface.py	/^    def query_user_rfid(self, room_no,berth_no):$/;"	kind:member	line:55
 query_web_user_name_pwd	../source/DBInterface.py	/^    def query_web_user_name_pwd(self):$/;"	kind:member	line:47
-register	../source/mysqlServer.py	/^def register():$/;"	kind:function	line:64
+register	../source/mysqlServer.py	/^def register():$/;"	kind:function	line:71
 respose_query_id_info	../source/dealRobotAccess.py	/^def respose_query_id_info(request_json):$/;"	kind:function	line:4
 respose_query_user_info	../source/dealRobotAccess.py	/^def respose_query_user_info(request_json):$/;"	kind:function	line:102
 respose_query_user_info	../source/dealWebAccess.py	/^def respose_query_user_info():$/;"	kind:function	line:4
@@ -62,8 +62,7 @@ respose_update_medicine_state	../source/dealRobotAccess.py	/^def respose_update_
 run_server	../fabfile.py	/^def run_server():$/;"	kind:function	line:42
 runbg	../fabfile.py	/^def runbg(cmd, sockname="dtach"):$/;"	kind:function	line:30
 save_user	../source/userRepository.py	/^    def save_user(self, user):$/;"	kind:member	line:66
-settings	../source/mysqlServer.py	/^def settings():$/;"	kind:function	line:31
 update_medicine_info	../source/DBInterface.py	/^    def update_medicine_info(self, user_id, medicine_id, date_yyyy, date_mm, date_dd):$/;"	kind:member	line:135
-update_medicine_state	../source/mysqlServer.py	/^def update_medicine_state():$/;"	kind:function	line:122
+update_medicine_state	../source/mysqlServer.py	/^def update_medicine_state():$/;"	kind:function	line:132
 upload_server	../fabfile.py	/^def upload_server():$/;"	kind:function	line:34
 userRepository.py	../source/userRepository.py	1;"	kind:file	line:1

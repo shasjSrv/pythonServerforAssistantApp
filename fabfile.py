@@ -41,4 +41,4 @@ def upload_server():
 
 def run_server():
     with cd('./server/DBserver/source'):
-        run('python mysqlServer.py')
+        runbg('python mysqlServer.py')
