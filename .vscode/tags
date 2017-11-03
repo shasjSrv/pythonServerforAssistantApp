@@ -4,65 +4,141 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-APP	../source/mysqlServer.py	/^APP = Flask(__name__)$/;"	kind:variable	line:21
+APP	../source/mysqlServer.py	/^APP = Flask(__name__)$/;"	kind:variable	line:24
 DB	../source/DBInterface.py	/^class DB(object):$/;"	kind:class	line:28
 DBInterface.py	../source/DBInterface.py	1;"	kind:file	line:1
 DORCORT	../source/DBInterface.py	/^DORCORT = 2$/;"	kind:variable	line:19
 DURATION	../source/DBInterface.py	/^DURATION = 4$/;"	kind:variable	line:25
-LOGIN_MANAGER	../source/mysqlServer.py	/^LOGIN_MANAGER = LoginManager()$/;"	kind:variable	line:24
+DiseaseInfo	../source/modelDatabase.py	/^class DiseaseInfo(MySQLModel):$/;"	kind:class	line:41
+LOGIN_MANAGER	../source/mysqlServer.py	/^LOGIN_MANAGER = LoginManager()$/;"	kind:variable	line:27
 MANAGER	../source/DBInterface.py	/^MANAGER = 3$/;"	kind:variable	line:20
-MYDB	../source/mysqlServer.py	/^MYDB = DB()$/;"	kind:variable	line:30
+MYDB	../source/mysqlServer.py	/^MYDB = DB()$/;"	kind:variable	line:34
+MYSQLDB	../source/modelDatabase.py	/^MYSQLDB = pw.MySQLDatabase(SETTINGS['MYSQL_DBNAME'],$/;"	kind:variable	line:15
+MedicalUserInfo	../source/modelDatabase.py	/^class MedicalUserInfo(MySQLModel):$/;"	kind:class	line:49
+MedicineInfo	../source/modelDatabase.py	/^class MedicineInfo(MySQLModel):$/;"	kind:class	line:61
+Meta	../source/modelDatabase.py	/^    class Meta:$/;"	kind:class	line:24
+Meta	../source/modelDatabase.py	/^    class Meta:$/;"	kind:class	line:37
+Meta	../source/modelDatabase.py	/^    class Meta:$/;"	kind:class	line:45
+Meta	../source/modelDatabase.py	/^    class Meta:$/;"	kind:class	line:57
+Meta	../source/modelDatabase.py	/^    class Meta:$/;"	kind:class	line:67
+Meta	../source/modelDatabase.py	/^    class Meta:$/;"	kind:class	line:76
+Meta	../source/modelDatabase.py	/^    class Meta:$/;"	kind:class	line:85
+Meta	../source/modelDatabase.py	/^    class Meta:$/;"	kind:class	line:94
+MoomInfo	../source/modelDatabase.py	/^class MoomInfo(MySQLModel):$/;"	kind:class	line:72
+MySQLModel	../source/modelDatabase.py	/^class MySQLModel(pw.Model):$/;"	kind:class	line:22
+NOTSEND	../source/modelDatabase.py	/^NOTSEND = 0$/;"	kind:variable	line:5
 NURSE	../source/DBInterface.py	/^NURSE = 1$/;"	kind:variable	line:18
 PATIENT	../source/DBInterface.py	/^PATIENT = 0$/;"	kind:variable	line:17
+RoomUserInfo	../source/modelDatabase.py	/^class RoomUserInfo(MySQLModel):$/;"	kind:class	line:80
+SENT	../source/modelDatabase.py	/^SENT = 1$/;"	kind:variable	line:4
 SETTINGS	../source/DBInterface.py	/^SETTINGS = {}$/;"	kind:variable	line:7
-USERS_RESPOITORY	../source/mysqlServer.py	/^USERS_RESPOITORY = UsersRepository()$/;"	kind:variable	line:31
+SETTINGS	../source/modelDatabase.py	/^SETTINGS = {}$/;"	kind:variable	line:8
+SOCKETIO	../source/mysqlServer.py	/^SOCKETIO = SocketIO(APP)$/;"	kind:variable	line:32
+USERS_RESPOITORY	../source/mysqlServer.py	/^USERS_RESPOITORY = UsersRepository()$/;"	kind:variable	line:35
 User	../source/userRepository.py	/^class User(UserMixin):$/;"	kind:class	line:7
+UserInfo	../source/modelDatabase.py	/^class UserInfo(MySQLModel):$/;"	kind:class	line:28
 UsersRepository	../source/userRepository.py	/^class UsersRepository:$/;"	kind:class	line:38
+WebUserLoginInfo	../source/modelDatabase.py	/^class WebUserLoginInfo(MySQLModel):$/;"	kind:class	line:89
 __init__	../source/DBInterface.py	/^    def __init__(self):$/;"	kind:member	line:34
 __init__	../source/userRepository.py	/^    def __init__(self , username , password , id , active=True):$/;"	kind:member	line:8
 __init__	../source/userRepository.py	/^    def __init__(self):$/;"	kind:member	line:40
-check_update_condition	../source/mysqlServer.py	/^def check_update_condition():$/;"	kind:function	line:148
+after_request	../source/mysqlServer.py	/^def after_request(response):$/;"	kind:function	line:251
+age	../source/modelDatabase.py	/^    age = pw.IntegerField()$/;"	kind:variable	line:34
+before_request	../source/mysqlServer.py	/^def before_request():$/;"	kind:function	line:247
+berthNo	../source/modelDatabase.py	/^    berthNo = pw.IntegerField()$/;"	kind:variable	line:84
+check_update_condition	../source/mysqlServer.py	/^def check_update_condition():$/;"	kind:function	line:200
 conn	../source/DBInterface.py	/^    conn = None$/;"	kind:variable	line:32
 connect	../source/DBInterface.py	/^    def connect(self):$/;"	kind:member	line:37
+database	../source/modelDatabase.py	/^        database = MYSQLDB$/;"	kind:variable	line:25
+dateTime	../source/modelDatabase.py	/^    dateTime = pw.DateField()$/;"	kind:variable	line:55
+db_table	../source/modelDatabase.py	/^        db_table = 'diseaseInfo'$/;"	kind:variable	line:46
+db_table	../source/modelDatabase.py	/^        db_table = 'medicalUserInfo'$/;"	kind:variable	line:58
+db_table	../source/modelDatabase.py	/^        db_table = 'medicineInfo'$/;"	kind:variable	line:68
+db_table	../source/modelDatabase.py	/^        db_table = 'roomInfo'$/;"	kind:variable	line:77
+db_table	../source/modelDatabase.py	/^        db_table = 'roomUserInfo'$/;"	kind:variable	line:86
+db_table	../source/modelDatabase.py	/^        db_table = 'userInfo'$/;"	kind:variable	line:38
+db_table	../source/modelDatabase.py	/^        db_table = 'webUserLoginInfo'$/;"	kind:variable	line:95
 dealRobotAccess.py	../source/dealRobotAccess.py	1;"	kind:file	line:1
 dealWebAccess.py	../source/dealWebAccess.py	1;"	kind:file	line:1
+default	../source/mysqlServer.py	/^def default():$/;"	kind:function	line:40
+delete_medicine_to_user	../source/dealWebAccess.py	/^def delete_medicine_to_user(request_json):$/;"	kind:function	line:107
+delete_medicine_to_user	../source/mysqlServer.py	/^def delete_medicine_to_user():$/;"	kind:function	line:155
+diseaseDec	../source/modelDatabase.py	/^    diseaseDec = pw.CharField()$/;"	kind:variable	line:44
+diseaseType	../source/modelDatabase.py	/^    diseaseType = pw.IntegerField()$/;"	kind:variable	line:36
+diseaseType	../source/modelDatabase.py	/^    diseaseType = pw.IntegerField()$/;"	kind:variable	line:43
 fabfile.py	../fabfile.py	1;"	kind:file	line:1
+gender	../source/modelDatabase.py	/^    gender = pw.CharField()$/;"	kind:variable	line:35
 get_auth_token	../source/userRepository.py	/^    def get_auth_token(self):$/;"	kind:member	line:23
 get_id	../source/userRepository.py	/^    def get_id(self):$/;"	kind:member	line:17
 get_user	../source/userRepository.py	/^    def get_user(self, username):$/;"	kind:member	line:71
 get_user_by_id	../source/userRepository.py	/^    def get_user_by_id(self, userid):$/;"	kind:member	line:74
+handle_my_custom_event	../source/mysqlServer.py	/^def handle_my_custom_event(json):$/;"	kind:function	line:256
 hash_password	../source/userRepository.py	/^    def hash_password(self):$/;"	kind:member	line:26
+host	../source/modelDatabase.py	/^                        host=SETTINGS['MYSQL_HOST'],$/;"	kind:variable	line:16
 host_ip	../fabfile.py	/^host_ip = "118.89.57.249"$/;"	kind:variable	line:12
+id	../source/modelDatabase.py	/^    id = pw.IntegerField(primary_key=True)$/;"	kind:variable	line:51
+insert_medicine_to_user	../source/dealWebAccess.py	/^def insert_medicine_to_user(request_json):$/;"	kind:function	line:92
+insert_medicine_to_user	../source/mysqlServer.py	/^def insert_medicine_to_user():$/;"	kind:function	line:139
 insert_registered_user	../source/userRepository.py	/^    def insert_registered_user(self, user):$/;"	kind:member	line:57
-insert_web_user_login_info	../source/DBInterface.py	/^    def insert_web_user_login_info(self, user_id, user_name, passwd):$/;"	kind:member	line:148
+insert_web_user_login_info	../source/DBInterface.py	/^    def insert_web_user_login_info(self, user_id, user_name, passwd):$/;"	kind:member	line:149
 is_active	../source/userRepository.py	/^    def is_active(self):$/;"	kind:member	line:20
-load_user	../source/mysqlServer.py	/^def load_user(userid):$/;"	kind:function	line:166
-login	../source/mysqlServer.py	/^def login():$/;"	kind:function	line:35
+is_send	../source/modelDatabase.py	/^    is_send = pw.IntegerField(db_column='isSend')$/;"	kind:variable	line:56
+load_user	../source/mysqlServer.py	/^def load_user(userid):$/;"	kind:function	line:221
+login	../source/mysqlServer.py	/^def login():$/;"	kind:function	line:45
+medicineDosage	../source/modelDatabase.py	/^    medicineDosage = pw.CharField()$/;"	kind:variable	line:65
+medicineID	../source/modelDatabase.py	/^    medicineID = pw.IntegerField()$/;"	kind:variable	line:53
+medicineID	../source/modelDatabase.py	/^    medicineID = pw.IntegerField(primary_key=True)$/;"	kind:variable	line:63
+medicineName	../source/modelDatabase.py	/^    medicineName = pw.CharField()$/;"	kind:variable	line:64
+medicine_info	../source/testDB.py	/^    medicine_info = {}$/;"	kind:variable	line:14
+medicine_info	../source/testDB.py	/^    medicine_info = {}$/;"	kind:variable	line:23
+modelDatabase.py	../source/modelDatabase.py	1;"	kind:file	line:1
 mysqlServer.py	../source/mysqlServer.py	1;"	kind:file	line:1
 next_index	../source/userRepository.py	/^    def next_index(self):$/;"	kind:member	line:77
-not_found	../source/mysqlServer.py	/^def not_found(error):$/;"	kind:function	line:158
-query_id_info	../source/mysqlServer.py	/^def query_id_info():$/;"	kind:function	line:120
-query_patient	../source/DBInterface.py	/^    def query_patient(self):$/;"	kind:member	line:115
-query_patient_info	../source/DBInterface.py	/^    def query_patient_info(self):$/;"	kind:member	line:67
-query_patient_info	../source/mysqlServer.py	/^def query_patient_info():$/;"	kind:function	line:90
-query_patient_info_by_userid	../source/DBInterface.py	/^    def query_patient_info_by_userid(self, user_id):$/;"	kind:member	line:80
+not_found	../source/mysqlServer.py	/^def not_found(error):$/;"	kind:function	line:213
+number	../source/modelDatabase.py	/^    number = pw.IntegerField()$/;"	kind:variable	line:54
+on_join	../source/mysqlServer.py	/^def on_join(data):$/;"	kind:function	line:261
+passwd	../source/modelDatabase.py	/^                        passwd=SETTINGS['MYSQL_PASSWD'])$/;"	kind:variable	line:19
+passwd	../source/modelDatabase.py	/^    passwd = pw.CharField()$/;"	kind:variable	line:93
+port	../source/modelDatabase.py	/^                        port=3306,$/;"	kind:variable	line:17
+query_id_info	../source/mysqlServer.py	/^def query_id_info():$/;"	kind:function	line:172
+query_medicine_info	../source/mysqlServer.py	/^def query_medicine_info():$/;"	kind:function	line:128
+query_patient	../source/DBInterface.py	/^    def query_patient(self):$/;"	kind:member	line:116
+query_patient_info	../source/DBInterface.py	/^    def query_patient_info(self):$/;"	kind:member	line:68
+query_patient_info	../source/mysqlServer.py	/^def query_patient_info():$/;"	kind:function	line:98
+query_patient_info_by_userid	../source/DBInterface.py	/^    def query_patient_info_by_userid(self, user_id):$/;"	kind:member	line:81
 query_registered_user	../source/userRepository.py	/^    def query_registered_user(self):$/;"	kind:member	line:47
-query_room_rfid	../source/DBInterface.py	/^    def query_room_rfid(self, room_no):$/;"	kind:member	line:127
-query_user_medicine	../source/mysqlServer.py	/^def query_user_medicine():$/;"	kind:function	line:104
-query_user_medicine_info	../source/DBInterface.py	/^    def query_user_medicine_info(self, user_id):$/;"	kind:member	line:103
-query_user_name	../source/DBInterface.py	/^    def query_user_name(self, user_id):$/;"	kind:member	line:93
-query_user_rfid	../source/DBInterface.py	/^    def query_user_rfid(self, room_no,berth_no):$/;"	kind:member	line:55
-query_web_user_name_pwd	../source/DBInterface.py	/^    def query_web_user_name_pwd(self):$/;"	kind:member	line:47
-register	../source/mysqlServer.py	/^def register():$/;"	kind:function	line:71
+query_room_rfid	../source/DBInterface.py	/^    def query_room_rfid(self, room_no):$/;"	kind:member	line:128
+query_user_medicine	../source/mysqlServer.py	/^def query_user_medicine():$/;"	kind:function	line:112
+query_user_medicine_info	../source/DBInterface.py	/^    def query_user_medicine_info(self, user_id):$/;"	kind:member	line:104
+query_user_name	../source/DBInterface.py	/^    def query_user_name(self, user_id):$/;"	kind:member	line:94
+query_user_rfid	../source/DBInterface.py	/^    def query_user_rfid(self, room_no,berth_no):$/;"	kind:member	line:56
+query_web_user_name_pwd	../source/DBInterface.py	/^    def query_web_user_name_pwd(self):$/;"	kind:member	line:48
+register	../source/mysqlServer.py	/^def register():$/;"	kind:function	line:79
 respose_query_id_info	../source/dealRobotAccess.py	/^def respose_query_id_info(request_json):$/;"	kind:function	line:4
+respose_query_medicine	../source/dealWebAccess.py	/^def respose_query_medicine():$/;"	kind:function	line:75
 respose_query_user_info	../source/dealRobotAccess.py	/^def respose_query_user_info(request_json):$/;"	kind:function	line:102
-respose_query_user_info	../source/dealWebAccess.py	/^def respose_query_user_info():$/;"	kind:function	line:4
-respose_query_user_medicine	../source/dealWebAccess.py	/^def respose_query_user_medicine(request_json):$/;"	kind:function	line:38
+respose_query_user_info	../source/dealWebAccess.py	/^def respose_query_user_info():$/;"	kind:function	line:6
+respose_query_user_medicine	../source/dealWebAccess.py	/^def respose_query_user_medicine(request_json):$/;"	kind:function	line:39
 respose_update_medicine_state	../source/dealRobotAccess.py	/^def respose_update_medicine_state(request_json):$/;"	kind:function	line:78
+rfid	../source/modelDatabase.py	/^    rfid = pw.CharField()$/;"	kind:variable	line:33
+roomNo	../source/modelDatabase.py	/^    roomNo = pw.IntegerField()$/;"	kind:variable	line:83
+room_no	../source/modelDatabase.py	/^    room_no = pw.IntegerField(primary_key=True)$/;"	kind:variable	line:74
+room_rfid	../source/modelDatabase.py	/^    room_rfid = pw.CharField()$/;"	kind:variable	line:75
 run_server	../fabfile.py	/^def run_server():$/;"	kind:function	line:42
 runbg	../fabfile.py	/^def runbg(cmd, sockname="dtach"):$/;"	kind:function	line:30
 save_user	../source/userRepository.py	/^    def save_user(self, user):$/;"	kind:member	line:66
-update_medicine_info	../source/DBInterface.py	/^    def update_medicine_info(self, user_id, medicine_id, date_yyyy, date_mm, date_dd):$/;"	kind:member	line:135
-update_medicine_state	../source/mysqlServer.py	/^def update_medicine_state():$/;"	kind:function	line:132
+send_static	../source/mysqlServer.py	/^def send_static(path):$/;"	kind:function	line:238
+testDB.py	../source/testDB.py	1;"	kind:file	line:1
+type	../source/modelDatabase.py	/^    type = pw.IntegerField()$/;"	kind:variable	line:32
+unit	../source/modelDatabase.py	/^    unit = pw.CharField()$/;"	kind:variable	line:66
+update_medicine_info	../source/DBInterface.py	/^    def update_medicine_info(self, user_id, medicine_id, date_yyyy, date_mm, date_dd):$/;"	kind:member	line:136
+update_medicine_state	../source/mysqlServer.py	/^def update_medicine_state():$/;"	kind:function	line:184
 upload_server	../fabfile.py	/^def upload_server():$/;"	kind:function	line:34
+user	../source/modelDatabase.py	/^                        user=SETTINGS['MYSQL_USER'],$/;"	kind:variable	line:18
+userID	../source/modelDatabase.py	/^    userID = pw.IntegerField()$/;"	kind:variable	line:30
+userID	../source/modelDatabase.py	/^    userID = pw.IntegerField()$/;"	kind:variable	line:52
+userID	../source/modelDatabase.py	/^    userID = pw.IntegerField(primary_key=True)$/;"	kind:variable	line:82
+userID	../source/modelDatabase.py	/^    userID = pw.IntegerField(primary_key=True)$/;"	kind:variable	line:91
+userName	../source/modelDatabase.py	/^    userName = pw.CharField()$/;"	kind:variable	line:31
+userName	../source/modelDatabase.py	/^    userName = pw.CharField()$/;"	kind:variable	line:92
 userRepository.py	../source/userRepository.py	1;"	kind:file	line:1

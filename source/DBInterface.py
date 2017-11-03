@@ -44,6 +44,7 @@ class DB(object):
                                     passwd=SETTINGS['MYSQL_PASSWD'],
                                     db=SETTINGS['MYSQL_DBNAME'],
                                     charset='utf8')
+                                    
     def query_web_user_name_pwd(self):
         cursor = self.conn.cursor()
         cursor.execute("select * from webUserLoginInfo")

@@ -1,0 +1,3 @@
+
+ROBOT = 0
+WEBCLIENT = 1
