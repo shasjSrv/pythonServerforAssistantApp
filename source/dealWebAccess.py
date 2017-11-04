@@ -7,7 +7,7 @@ def respose_query_user_info():
     """
     This function is about querying whole info of a user.
     """
-    respose = {
+    response = {
         'userID': [],
         'userName': [],
         'age': [],
@@ -20,27 +20,27 @@ def respose_query_user_info():
     ret = query_patient_info_db.query_patient_info()
 
     if ret is None:
-        return respose
+        return response
 
     for i in range(0, len(ret)):
         # 7 columns: 0 userID,1 userName,2 age
         #           3 gender, 4 rfid, 5 roomNo, 6 berthNo
-        respose['userID'].append(ret[i][0])
-        respose['userName'].append(ret[i][1])
-        respose['age'].append(ret[i][2])
-        respose['gender'].append(ret[i][3])
-        respose['rfid'].append(ret[i][4])
-        respose['roomNo'].append(ret[i][5])
-        respose['berthNo'].append(ret[i][6])
+        response['userID'].append(ret[i][0])
+        response['userName'].append(ret[i][1])
+        response['age'].append(ret[i][2])
+        response['gender'].append(ret[i][3])
+        response['rfid'].append(ret[i][4])
+        response['roomNo'].append(ret[i][5])
+        response['berthNo'].append(ret[i][6])
 
-    return respose
+    return response
 
 
 def respose_query_user_medicine(request_json):
     """
     This function is about querying medicine info of a user.
     """
-    respose = {
+    response = {
         'isSuccess': 0,
         'medicineName': [],
         'medicineCount': [],
@@ -54,29 +54,29 @@ def respose_query_user_medicine(request_json):
     ret_medicine = query_medecine_info_db.query_user_medicine_info(user_id)
 
     if ret_medicine is None:
-        return respose
-    respose['isSuccess'] = 1
+        return response
+    response['isSuccess'] = 1
 
     for j in range(0, len(ret_medicine)):
         # 7 columns: 0 userID,1 medicineName,2 medicineDosage
         #           3 uNit, 4 number, 5 isSend, 6 medicineID,8 dateTime
         is_send = ret_medicine[j][5]
         measure = str(ret_medicine[j][4]) + ret_medicine[j][3]
-        respose['medicineName'].append(ret_medicine[j][1])
-        respose['medicineCount'].append(measure)
-        respose['medicineDosage'].append(ret_medicine[j][2])
-        respose['medicineID'].append(ret_medicine[j][6])
-        respose['isSent'].append(is_send)
-        respose['dateTime'].append(ret_medicine[j][7].strftime('%m/%d/%Y'))
+        response['medicineName'].append(ret_medicine[j][1])
+        response['medicineCount'].append(measure)
+        response['medicineDosage'].append(ret_medicine[j][2])
+        response['medicineID'].append(ret_medicine[j][6])
+        response['isSent'].append(is_send)
+        response['dateTime'].append(ret_medicine[j][7].strftime('%m/%d/%Y'))
 
-    return respose
+    return response
 
 
 def respose_query_medicine():
     """
     This function is about querying whole medicine info
     """
-    respose = {
+    response = {
         "MedicineInfo": []
     }
     for medicine in MedicineInfo.select():
@@ -85,12 +85,12 @@ def respose_query_medicine():
         medicine_info['medicineName'] = medicine.medicineName
         medicine_info['medicineDosage'] = medicine.medicineDosage
         medicine_info['unit'] = medicine.unit
-        respose['MedicineInfo'].append(medicine_info)
-    return respose
+        response['MedicineInfo'].append(medicine_info)
+    return response
 
 
 def insert_medicine_to_user(request_json):
-    respose = {
+    response = {
         'isSuccess': "false"
     }
     user_id = request_json['user_id']
@@ -101,20 +101,22 @@ def insert_medicine_to_user(request_json):
                                     number=number,
                                     dateTime=datetime.datetime.now().strftime("%Y-%m-%d"),
                                     is_send=NOTSEND).execute()
-    respose['isSuccess'] = 'true'
-    return respose
+    response['isSuccess'] = 'true'
+    return response
+
 
 def delete_medicine_to_user(request_json):
-    respose = {
+    response = {
         'isSuccess': "false"
     }
     user_id = request_json['user_id']
-    medicine_id = request_json['medicine_id']
-    number = request_json['number']
-    insert = MedicalUserInfo.delete().where(MedicalUserInfo.userID == user_id,
-                                    MedicalUserInfo.medicineID == medicine_id,
-                                    MedicalUserInfo.number == number).execute()
-    respose['isSuccess'] = 'true'
-    return respose
-
-
+    medicine_id_array = request_json['medicine_id']
+    number_array = request_json['number']
+    # medicine_id = request_json['medicine_id']
+    # number = request_json['number']
+    for i, medicine_id in enumerate(medicine_id_array):
+        delete = MedicalUserInfo.delete().where(MedicalUserInfo.userID == user_id,
+                                                MedicalUserInfo.medicineID == medicine_id,
+                                                MedicalUserInfo.number == number_array[i]).execute()
+    response['isSuccess'] = 'true'
+    return response
