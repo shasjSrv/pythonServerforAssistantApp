@@ -214,6 +214,18 @@ def check_update_condition():
 
     return jsonify({'result': respose}), 201
 
+@APP.route('/managePatient',methods=['POST'])
+def manage_patient():
+    if not request.json or not 'options' in request.json:
+        abort(400)
+    if request.json['options'] == ADDPATIENT :
+        respose = dealWebAccess.add_patient_info(request.json)
+    elif request.json['options'] == DELETEPATIENT:
+        respose = dealWebAccess.delete_patient_info(request.json)
+    elif request.json['options'] == QUERYDISEASEINFO:
+        respose = dealWebAccess.query_disease_info()
+    return jsonify({'result': respose}), 201
+
 
 @APP.errorhandler(404)
 def not_found(error):

@@ -1,4 +1,4 @@
-from DBInterface import DB
+from DBInterface import DB, PATIENT
 from modelDatabase import *
 import datetime
 
@@ -14,7 +14,9 @@ def respose_query_user_info():
         'gender': [],
         'rfid': [],
         'roomNo': [],
-        'berthNo': []
+        'berthNo': [],
+        'diseaseType': [],
+        'diseaseDec': [],
     }
     query_patient_info_db = DB()
     ret = query_patient_info_db.query_patient_info()
@@ -23,8 +25,9 @@ def respose_query_user_info():
         return response
 
     for i in range(0, len(ret)):
-        # 7 columns: 0 userID,1 userName,2 age
+        # 9 columns: 0 userID,1 userName,2 age
         #           3 gender, 4 rfid, 5 roomNo, 6 berthNo
+        #           7 diseaseType 8 diseaseDec
         response['userID'].append(ret[i][0])
         response['userName'].append(ret[i][1])
         response['age'].append(ret[i][2])
@@ -32,6 +35,8 @@ def respose_query_user_info():
         response['rfid'].append(ret[i][4])
         response['roomNo'].append(ret[i][5])
         response['berthNo'].append(ret[i][6])
+        response['diseaseType'].append(ret[i][7])
+        response['diseaseDec'].append(ret[i][8])
 
     return response
 
@@ -90,6 +95,9 @@ def respose_query_medicine():
 
 
 def insert_medicine_to_user(request_json):
+    """
+    This function is about adding medicine to one user.
+    """
     response = {
         'isSuccess': "false"
     }
@@ -106,6 +114,9 @@ def insert_medicine_to_user(request_json):
 
 
 def delete_medicine_to_user(request_json):
+    """
+    This function is about deleting medicine from one user.abs
+    """
     response = {
         'isSuccess': "false"
     }
@@ -118,5 +129,59 @@ def delete_medicine_to_user(request_json):
         delete = MedicalUserInfo.delete().where(MedicalUserInfo.userID == user_id,
                                                 MedicalUserInfo.medicineID == medicine_id,
                                                 MedicalUserInfo.number == number_array[i]).execute()
+    response['isSuccess'] = 'true'
+    return response
+
+
+def add_patient_info(request_json):
+    """
+    This function is about adding patient info.
+    """
+    response = {
+        'isSuccess': "false"
+    }
+    name = request_json['userName']
+    age = request_json['age']
+    gender = request_json['gender']
+    user_type = PATIENT
+    rfid = request_json['rfid']
+    diseaseType = request_json['diseaseType']
+    insert = UserInfo.insert(userName=name,
+                            type=user_type,
+                            rfid=rfid,
+                            age=age,
+                            gender=gender,
+                            diseaseType=diseaseType).execute()
+    if insert is not None:
+        response['isSuccess'] = 'true'
+    return response
+
+
+def delete_patient_info(request_json):
+    """
+    This function is about delete an exist patient.
+    """
+    response = {
+        'isSuccess': "false"
+    }
+    nameID = request_json['userID']
+    delete = UserInfo.delete().where(UserInfo.userID == nameID).execute()
+    response['isSuccess'] = 'true'
+    return response
+
+
+def query_disease_info():
+    """
+    This function is about query disease info.
+    """
+    response = {
+        'isSuccess': "false",
+        'DiseaseInfoArray' : []
+    }
+    for disease in DiseaseInfo.select():
+        disease_info = {}
+        disease_info['diseaseType'] = disease.diseaseType
+        disease_info['diseaseDec'] = disease.diseaseDec
+        response['DiseaseInfoArray'].append(disease_info)
     response['isSuccess'] = 'true'
     return response

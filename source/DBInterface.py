@@ -71,8 +71,9 @@ class DB(object):
         """
         cursor = self.conn.cursor()
         cursor.execute("select ui.userID,ui.userName,ui.age,ui.gender,ui.rfid,rui.roomNo,\
-        rui.berthNo from userInfo as ui left join roomUserInfo as rui on \
-        ui.userID = rui.userID where ui.type = %s", (PATIENT,))
+        rui.berthNo,ui.diseaseType,di.diseaseDec from userInfo as ui left join roomUserInfo as rui on \
+        ui.userID = rui.userID left join diseaseInfo as di on ui.diseaseType = di.diseaseType\
+        where ui.type = %s", (PATIENT,))
         onedata = cursor.fetchall()
         cursor.close()
         self.conn.close()

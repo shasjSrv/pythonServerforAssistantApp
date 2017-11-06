@@ -40,7 +40,7 @@ class UserInfo(MySQLModel):
 
 class DiseaseInfo(MySQLModel):
     """diseaseInfo table"""
-    diseaseType = pw.IntegerField()
+    diseaseType = pw.IntegerField(primary_key=True)
     diseaseDec = pw.CharField()
     class Meta:
         db_table = 'diseaseInfo'
