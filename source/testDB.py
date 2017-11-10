@@ -35,4 +35,6 @@ for medicineUserInfo in MedicalUserInfo.select():
 #                                 dateTime=datetime.datetime.now().strftime("%Y-%m-%d"),
 #                                 is_send=NOTSEND).execute()
 
+UserInfo.delete().where(UserInfo.userID == 6).execute()
+
 MYSQLDB.close()

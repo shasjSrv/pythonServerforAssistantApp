@@ -164,8 +164,12 @@ def delete_patient_info(request_json):
     response = {
         'isSuccess': "false"
     }
-    nameID = request_json['userID']
-    delete = UserInfo.delete().where(UserInfo.userID == nameID).execute()
+    user_id_array = request_json['userIDArray']
+    for i,user_id in enumerate(user_id_array):
+        print user_id
+        delete = UserInfo.delete().where(UserInfo.userID == user_id).execute()
+    # nameID = request_json['userID']
+    # delete = UserInfo.delete().where(UserInfo.userID == nameID).execute()
     response['isSuccess'] = 'true'
     return response
 

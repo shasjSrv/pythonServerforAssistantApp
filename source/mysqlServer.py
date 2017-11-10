@@ -281,6 +281,7 @@ def handle_my_custom_event(json):
 
 @SOCKETIO.on('join')
 def on_join(data):
+    print data
     json_data = json.loads(data)
     if not json_data or not 'room' \
     or not 'client_type' in json_data:
@@ -292,8 +293,10 @@ def on_join(data):
     }
     room = json_data['room']
     client_type = json_data['client_type']
+    user_name = json_data['user_name']
     respose['type'] = client_type
     respose['room'] = room
+    respose['user_name'] = user_name
     print "join %s"%room
     response = json.dumps({'body':respose})
     emit('joinRep',response, broadcast=True)
