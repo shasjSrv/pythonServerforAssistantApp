@@ -73,7 +73,7 @@ delete_medicine_to_user	../source/mysqlServer.py	/^def delete_medicine_to_user()
 delete_patient_info	../source/dealWebAccess.py	/^def delete_patient_info(request_json):$/;"	kind:function	line:160
 diseaseDec	../source/modelDatabase.py	/^    diseaseDec = pw.CharField()$/;"	kind:variable	line:44
 diseaseType	../source/modelDatabase.py	/^    diseaseType = pw.IntegerField()$/;"	kind:variable	line:36
-diseaseType	../source/modelDatabase.py	/^    diseaseType = pw.IntegerField()$/;"	kind:variable	line:43
+diseaseType	../source/modelDatabase.py	/^    diseaseType = pw.IntegerField(primary_key=True)$/;"	kind:variable	line:43
 fabfile.py	../fabfile.py	1;"	kind:file	line:1
 gender	../source/modelDatabase.py	/^    gender = pw.CharField()$/;"	kind:variable	line:35
 get_auth_token	../source/userRepository.py	/^    def get_auth_token(self):$/;"	kind:member	line:23
@@ -106,11 +106,11 @@ next_index	../source/userRepository.py	/^    def next_index(self):$/;"	kind:memb
 not_found	../source/mysqlServer.py	/^def not_found(error):$/;"	kind:function	line:231
 number	../source/modelDatabase.py	/^    number = pw.IntegerField()$/;"	kind:variable	line:54
 on_join	../source/mysqlServer.py	/^def on_join(data):$/;"	kind:function	line:283
-on_leave	../source/mysqlServer.py	/^def on_leave(data):$/;"	kind:function	line:302
+on_leave	../source/mysqlServer.py	/^def on_leave(data):$/;"	kind:function	line:305
 passwd	../source/modelDatabase.py	/^                        passwd=SETTINGS['MYSQL_PASSWD'])$/;"	kind:variable	line:19
 passwd	../source/modelDatabase.py	/^    passwd = pw.CharField()$/;"	kind:variable	line:93
 port	../source/modelDatabase.py	/^                        port=3306,$/;"	kind:variable	line:17
-query_disease_info	../source/dealWebAccess.py	/^def query_disease_info():$/;"	kind:function	line:173
+query_disease_info	../source/dealWebAccess.py	/^def query_disease_info():$/;"	kind:function	line:177
 query_id_info	../source/mysqlServer.py	/^def query_id_info():$/;"	kind:function	line:178
 query_medicine_info	../source/mysqlServer.py	/^def query_medicine_info():$/;"	kind:function	line:134
 query_patient	../source/DBInterface.py	/^    def query_patient(self):$/;"	kind:member	line:117
