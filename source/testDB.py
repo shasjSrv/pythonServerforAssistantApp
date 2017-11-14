@@ -2,6 +2,7 @@ from modelDatabase import MYSQLDB
 from modelDatabase import *
 import sys
 import datetime
+from peewee import fn
 
 
 reload(sys)
@@ -16,7 +17,7 @@ for medicine in MedicineInfo.select():
     medicine_info['medicineName'] = medicine.medicineName
     medicine_info['medicineDosage'] = medicine.medicineDosage
     medicine_info['unit'] = medicine.unit
-    print medicine.medicineName
+    # print medicine.medicineName
 print "\n"
 
 for medicineUserInfo in MedicalUserInfo.select():
@@ -35,6 +36,9 @@ for medicineUserInfo in MedicalUserInfo.select():
 #                                 dateTime=datetime.datetime.now().strftime("%Y-%m-%d"),
 #                                 is_send=NOTSEND).execute()
 
-UserInfo.delete().where(UserInfo.userID == 6).execute()
+# UserInfo.delete().where(UserInfo.userID == 6).execute()
 
+for user in UserInfo.select(fn.Max(UserInfo.userID)):
+    print user.userID
+# print userId
 MYSQLDB.close()

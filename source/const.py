@@ -2,6 +2,11 @@
 ROBOT = 0
 WEBCLIENT = 1
 
+"""
+invalued number
+"""
+INVALUED = -1
+
 
 """
 the options value of managePationt routing

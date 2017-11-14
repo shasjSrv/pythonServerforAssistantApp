@@ -27,7 +27,7 @@ class MySQLModel(pw.Model):
 
 class UserInfo(MySQLModel):
     """userInfo table"""
-    userID = pw.IntegerField()
+    userID = pw.IntegerField(primary_key=True)
     userName = pw.CharField()
     type = pw.IntegerField()
     rfid = pw.CharField()

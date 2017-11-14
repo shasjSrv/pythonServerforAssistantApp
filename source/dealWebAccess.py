@@ -1,6 +1,8 @@
 from DBInterface import DB, PATIENT
 from modelDatabase import *
+from peewee import fn
 import datetime
+from const import *
 
 
 def respose_query_user_info():
@@ -146,12 +148,23 @@ def add_patient_info(request_json):
     user_type = PATIENT
     rfid = request_json['rfid']
     diseaseType = request_json['diseaseType']
+    roomNo = request_json['roomNo']
+    berthNo = request_json['berthNo']
     insert = UserInfo.insert(userName=name,
-                            type=user_type,
-                            rfid=rfid,
-                            age=age,
-                            gender=gender,
-                            diseaseType=diseaseType).execute()
+                             type=user_type,
+                             rfid=rfid,
+                             age=age,
+                             gender=gender,
+                             diseaseType=diseaseType).execute()
+    if insert is not None:
+        userID = INVALUED
+        for user in UserInfo.select(fn.Max(UserInfo.userID)):
+            print user.userID
+            userID = user.userID
+        insert = RoomUserInfo.insert(userID=userID,
+                                     roomNo=roomNo,
+                                     berthNo=berthNo)
+    #     insert = RoomUserInfo.insert(userID=)
     if insert is not None:
         response['isSuccess'] = 'true'
     return response
@@ -165,7 +178,7 @@ def delete_patient_info(request_json):
         'isSuccess': "false"
     }
     user_id_array = request_json['userIDArray']
-    for i,user_id in enumerate(user_id_array):
+    for i, user_id in enumerate(user_id_array):
         print user_id
         delete = UserInfo.delete().where(UserInfo.userID == user_id).execute()
     # nameID = request_json['userID']
@@ -180,7 +193,7 @@ def query_disease_info():
     """
     response = {
         'isSuccess': "false",
-        'DiseaseInfoArray' : []
+        'DiseaseInfoArray': []
     }
     for disease in DiseaseInfo.select():
         disease_info = {}
