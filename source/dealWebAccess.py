@@ -22,7 +22,6 @@ def respose_query_user_info():
     }
     query_patient_info_db = DB()
     ret = query_patient_info_db.query_patient_info()
-
     if ret is None:
         return response
 

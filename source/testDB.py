@@ -40,5 +40,15 @@ for medicineUserInfo in MedicalUserInfo.select():
 
 for user in UserInfo.select(fn.Max(UserInfo.userID)):
     print user.userID
-# print userId
+
+for user in UserInfo.select(UserInfo.userName, UserInfo.type):
+    print user.type
+
+info = (UserInfo.select(UserInfo,RoomUserInfo).join(RoomUserInfo, on=(RoomUserInfo.userID==UserInfo.userID).alias('roomInfo')).where(
+        UserInfo.userID == "0"
+    ))
+for user in info:
+    print "roomNo:{},berthNo:{}".format(user.roomInfo.roomNo,user.roomInfo.berthNo)
+
+    # print userId
 MYSQLDB.close()

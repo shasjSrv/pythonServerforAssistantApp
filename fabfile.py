@@ -38,10 +38,17 @@ def upload_server():
     with cd('~/server/DBserver'):
         run('unzip -o source.zip')
 
+def upload_test():
+    run('mkdir -p server/DBserver')
+    put('source/testDB.py','~/server/DBserver/source')
+
+def run_server_bg():
+    with cd('./server/DBserver/source'):
+        run('nohup python mysqlServer.py &')
 
 def run_server():
     with cd('./server/DBserver/source'):
-        runbg('python mysqlServer.py')
+        run('python mysqlServer.py')
 
 def run_test():
     with cd('./server/DBserver/source'):

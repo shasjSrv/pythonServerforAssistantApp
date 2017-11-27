@@ -1,5 +1,8 @@
-from DBInterface import DB
-
+from DBInterface import DB, PATIENT
+from modelDatabase import *
+from peewee import fn
+import datetime
+from const import *
 
 def respose_query_id_info(request_json):
     """
@@ -19,13 +22,19 @@ def respose_query_id_info(request_json):
     }
 
     user_id = request_json['user_id']
-    query_user_name_db = DB()
-    ret = query_user_name_db.query_user_name(user_id)
-    if ret is None:
-        return respose
+    # query_user_name_db = DB()
 
-    user_name = ret[0]
-    user_type = ret[1]
+    # ret = query_user_name_db.query_user_name(user_id)
+    for user in UserInfo.select(UserInfo.userName,UserInfo.type).where(UserInfo.userID == user_id):
+        if user is None: 
+            return respose
+        user_name = user.userName
+        user_type = user.type
+    # if ret is None:
+    #     return respose
+
+    # user_name = ret[0]
+    # user_type = ret[1]
 
     respose['isSuccess'] = 1
     respose['userName'] = user_name
