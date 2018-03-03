@@ -5,3 +5,4 @@ patient-info.tar
 patient-info/
 source/static/
 source/templates/
+.vscode/

@@ -44,7 +44,7 @@ def upload_test():
 
 def run_server_bg():
     with cd('./server/DBserver/source'):
-        run('nohup python mysqlServer.py &')
+        runbg('python mysqlServer.py')
 
 def run_server():
     with cd('./server/DBserver/source'):
